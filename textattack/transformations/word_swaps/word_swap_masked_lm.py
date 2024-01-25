@@ -86,7 +86,7 @@ class WordSwapMaskedLM(WordSwap):
         #             "`tokenizer` argument must be provided when passing an actual model as `masked_language_model`."
         #         )
         #     self._lm_tokenizer = tokenizer
-        model_path = os.path.join("/home/yibo/Desktop/Attack/models/textattack/bert-base-uncased-SST-2/sst2_cross_flip_disable_128_5e-5_20_30/20231204", "best_model.ckpt")
+        model_path = os.path.join("", "best_model.ckpt")
         self._language_model = PEFT_BERT_ATTACK.load_from_checkpoint(checkpoint_path=model_path)
         self._lm_tokenizer = AutoTokenizer.from_pretrained("textattack/bert-base-uncased-SST-2", padding_side="right")
 
