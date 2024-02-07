@@ -355,33 +355,10 @@ def main(args):
     ## random mask
     data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm_probability = args.mask/100)
 
-    # def insert_random_mask(batch):
-    #     # batch["labels"] = batch["input_ids"].copy()
-    #     features = [dict(zip(batch, t)) for t in zip(*batch.values())]
-    #     masked_inputs = data_collator(features)
-    #     # Create a new "masked" column for each column in the dataset
-    #     return {"masked_" + k: v.numpy() for k, v in masked_inputs.items()}
-
     train_datasets = tokenized_datasets["train"]
     val_datasets = tokenized_datasets["validation"]
-    # val_datasets = tokenized_datasets["validation"].map(
-    #     insert_random_mask,
-    #     batched=True, 
-    #     remove_columns=tokenized_datasets["validation"].column_names
-    #     )
-    # val_datasets = val_datasets.rename_columns({
-    #     "masked_input_ids": "input_ids",
-    #     "masked_attention_mask": "attention_mask",
-    #     "masked_token_type_ids": "token_type_ids",
-    #     "masked_labels": "labels",
-    #     "masked_cls_labels": "cls_labels"
-    #     })
 
     print(len(train_datasets), len(val_datasets))
-    ## prepare dataloader
-    # def collate_fn(examples):
-    #     # print(examples)
-    #     return tokenizer.pad(examples, return_tensors="pt")
 
     train_dataloader = DataLoader(
         train_datasets, shuffle=True, collate_fn=data_collator, batch_size=args.batch_size)
@@ -397,7 +374,7 @@ def main(args):
     checkpoint_callback = pl.callbacks.ModelCheckpoint(
         dirpath=args.dirpath,
         filename="best_model",
-        monitor="val_loss",
+        monitor="train_loss",
         mode="min",
         save_top_k=5,
     )
