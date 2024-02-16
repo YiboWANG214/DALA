@@ -1,4 +1,4 @@
-### Data preparation
+### Data Preparation
 
 ```
 1. get_md.py
