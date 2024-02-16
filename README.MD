@@ -1,15 +1,25 @@
-pipline:
+### Data preparation
 
-    1. get_md.py
+```
+1. get_md.py
+2. obtain_threshold.py
+```
 
-    2. dala.py
+### Fine-tuning Phase
 
-    3. textattack attack
+```
+3. dala.py
+```
 
-    4. inference.py
+### Inference Phase
 
-    5. obtain_threshold.py 
+```
+4. textattack attack
+5. inference.py
+```
 
-    6. evaluation.ipynb
+### Evaluation
 
-
+```
+ 6. evaluation.ipynb
+```
